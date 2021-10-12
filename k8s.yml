@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spot-app
+  namespace: workshop
+  labels:
+    app: spot
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: spot
+  template:
+    metadata:
+      labels:
+        app: spot
+    spec:
+      containers:
+      - name: spot-service
+        image: lobostome/spot:v1
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+        resources:
+          limits:
+            cpu: "0.5"
+            memory: "200Mi"
+          requests:
+            cpu: "100m" # 100 milliCPU == 0.1 
+            memory: "100Mi" # 100 mebibytes; 1MiB = 2^20 bytes
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /health
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /health
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
