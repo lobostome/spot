@@ -3,11 +3,26 @@ POD := $(shell kubectl get pods -n workshop -l app=spot --no-headers -o=custom-c
 apply:
 	kubectl apply -f k8s.yml
 
+map:
+	kubectl apply -f configmap.yml
+
+secret:
+	kubectl apply -f secret.yml
+
 delete:
 	kubectl delete -f k8s.yml
 
+cleanup-map:
+	kubectl delete -f configmap.yml
+
+cleanup-secret:
+	kubectl delete -f secret.yml
+
 port:
 	kubectl port-forward deployment/spot-app 9090:8080 -n workshop
+
+exec:
+	kubectl exec -it pods/$(POD) -n workshop -- bash
 
 pods:
 	kubectl get pods -n workshop -l app=spot
@@ -29,6 +44,9 @@ status:
 
 history:
 	kubectl rollout history deployment/spot-app -n workshop
+
+restart:
+	kubectl rollout restart deployment/spot-app -n workshop
 
 pod-describe:
 	kubectl describe pod/$(POD) -n workshop

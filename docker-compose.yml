@@ -1,0 +1,17 @@
+version: '3'
+services:
+  svc:
+    image: lobostome/probe:0.13.0
+    environment:
+      - GIT_USER_NAME=${GIT_USER_NAME}
+      - GIT_USER_EMAIL=${GIT_USER_EMAIL}
+      - GIT_USER_GPG_KEY=${GIT_USER_GPG_KEY}
+    volumes:
+      - .:/code
+      - ${PROJECT_BASE}/ssh:/root/.ssh
+      - ${PROJECT_BASE}/gpg:/root/.gnupg
+      - ${PROJECT_BASE}/gpg-agent:/gpg-agent
+    stdin_open: true
+    tty: true
+    working_dir: /code
+    command: sh -l

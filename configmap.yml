@@ -1,0 +1,10 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configmap-app-name
+  namespace: workshop
+  labels:
+    app: spot
+data:
+  NAME: Jane
