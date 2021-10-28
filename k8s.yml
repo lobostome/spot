@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: spot-service
-        image: lobostome/spot:v5
+        image: lobostome/spot:v1
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
