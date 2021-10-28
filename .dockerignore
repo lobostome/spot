@@ -3,3 +3,4 @@ npm-debug.log
 Makefile
 Dockerfile
 *.yml
+docker-compose.yml
