@@ -9,6 +9,14 @@ map:
 secret:
 	kubectl apply -f secret.yml
 
+service:
+	kubectl apply -f service.yml
+
+ingress:
+	kubectl apply -f ingress.yml
+
+cleanup: delete cleanup-map cleanup-secret cleanup-service cleanup-ingress cleanup-debug
+
 delete:
 	kubectl delete -f k8s.yml
 
@@ -18,11 +26,23 @@ cleanup-map:
 cleanup-secret:
 	kubectl delete -f secret.yml
 
+cleanup-service:
+	kubectl delete -f service.yml
+
+cleanup-ingress:
+	kubectl delete -f ingress.yml
+
+cleanup-debug:
+	kubectl delete -f debug.yml
+
 port:
 	kubectl port-forward deployment/spot-app 9090:8080 -n workshop
 
 exec:
 	kubectl exec -it pods/$(POD) -n workshop -- bash
+
+debug:
+	kubectl apply -f debug.yml
 
 pods:
 	kubectl get pods -n workshop -l app=spot

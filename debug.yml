@@ -1,0 +1,11 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: debug
+  namespace: workshop
+spec:
+  containers:
+  - image: alpine:latest
+    name: debug
+    command: ["sleep","infinity"]
