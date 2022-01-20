@@ -48,14 +48,14 @@ spec:
           periodSeconds: 10
           successThreshold: 1
           timeoutSeconds: 1
-        env:
-          - name: NAME
-            valueFrom:
-              configMapKeyRef:
-                name: configmap-app-name
-                key: NAME
-          # - name: NAME
-          #   valueFrom:
-          #     secretKeyRef:
-          #       name: secret-app-name
-          #       key: NAME
+        # env:
+        #   - name: NAME
+        #     valueFrom:
+        #       configMapKeyRef:
+        #         name: configmap-app-name
+        #         key: NAME
+        #   - name: NAME
+        #     valueFrom:
+        #       secretKeyRef:
+        #         name: secret-app-name
+        #         key: NAME
